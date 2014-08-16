@@ -22,17 +22,10 @@ train.raw <- read.table("./UCI HAR Dataset/train/X_train.txt")
 test.raw <- read.table("./UCI HAR Dataset/test/X_test.txt")
 
 
-## Feature/variable names - read in and change to more descriptive variable names
+## Feature/variable names - read in variable names
 
 features <- read.table("./UCI HAR Dataset/features.txt", stringsAsFactor=F)
 colnames(features) <- c("num", "name")
-
-features$name <- gsub('^t', 'Time', features$name)
-features$name <- gsub('^f', 'Freq', features$name)
-features$name <- gsub('mean', 'Mean', features$name)
-features$name <- gsub('std', 'Std', features$name)
-features$name <- gsub("-","",features$name)
-features$name <- gsub("\\()","",features$name)
 
 ## Set column names of test and train datasets
 
@@ -81,11 +74,19 @@ subject.data <- rbind(test.subjects, train.subjects)
 
 # 4. Extracts only the measurements on the mean and standard deviation for each measurement.
 
-select.data <- subject.data[,c(1,2,grep("Std", colnames(subject.data)), grep("Mean", colnames(subject.data)))]
+select.data <- subject.data[,c(1,2,grep("std", colnames(subject.data)), grep("mean", colnames(subject.data)))]
+
+# 5. Modifies the feature names to be more readable and more descriptive
+
+names(select.data) <- gsub('^t', 'Time', names(select.data))
+names(select.data) <- gsub('^f', 'Freq', names(select.data))
+names(select.data) <- gsub("-","", names(select.data))
+names(select.data) <- gsub("\\()","", names(select.data))
+names(select.data) <- gsub('mean', 'Mean', names(select.data))
+names(select.data) <- gsub('std', 'Std', names(select.data))
+
 tidy.data <- ddply(select.data, .(Subject, ActivityName), .fun=function(x){ colMeans(x[,-c(1:2)]) })
 
-# 5. Export the tidy set
+# 6. Export the tidy set
 
 write.table(tidy.data, file="./UCI HAR Dataset/tidydata.txt", sep="\t")
-
-
