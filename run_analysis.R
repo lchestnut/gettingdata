@@ -89,4 +89,4 @@ tidy.data <- ddply(select.data, .(Subject, ActivityName), .fun=function(x){ colM
 
 # 6. Export the tidy set
 
-write.table(tidy.data, file="./UCI HAR Dataset/tidydata.txt", sep="\t")
+write.table(tidy.data, file="./UCI HAR Dataset/tidydata.txt", sep="\t", row.names=FALSE)
