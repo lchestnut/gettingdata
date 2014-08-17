@@ -13,14 +13,16 @@ The purpose of this project is to demonstrate your ability to **collect**, **wor
 ## Steps used to get and clean the data set
   1. Installed and loaded needed library (plyr) and created function to capitalize activity names for greater readability
 
-  2. Reads and creates data sets for test and train subjects, activity and feature names with their respective data
+  2. Read and created data sets for test and train subjects, activity and feature names with their respective data
 
-  3. **Change feature and activity names to be more descriptive**
+  3. **Change activity names to be more descriptive**
 
   4. Merged activity labels with activity data, merged them with subjects
 
   5. **Combined test and training datasets to create one set**
 
   6. **Extracts only the measurements on the mean and standard deviation for each measurement.**
+  
+  7. **Change feature variable names to be more readable**
 
-  7. **Exported the tidy set**
+  8. **Exported the tidy set**
